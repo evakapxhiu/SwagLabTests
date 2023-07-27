@@ -47,4 +47,17 @@ public class LogInTest extends BaseTest {
         String actual=errorMessage.getText();
         Assertions.assertEquals(message,actual);
     }
+
+    @Test
+    public void logOutWithSucess(){
+        driver.get(Baseurl);
+        driver.manage().timeouts().implicitlyWait( 5, TimeUnit.SECONDS);
+
+        LogInPage logInPage=new LogInPage(driver);
+        logInPage.setUsername("standard_user");
+        logInPage.setPassword("secret_sauce");
+        logInPage.clickButton();
+        logInPage.LogOut();
+        Assertions.assertFalse(logInPage.idLoggedOut());
+    }
 }

@@ -15,7 +15,7 @@ public class BaseTest {
         driver = getChromeDriver();
     }
 
-    @AfterEach
-    void cleanup(){driver.close();
-    }
+//    @AfterEach
+//    void cleanup(){driver.close();
+//    }
 }

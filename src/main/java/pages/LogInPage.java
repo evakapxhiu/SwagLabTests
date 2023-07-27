@@ -12,6 +12,10 @@ public class LogInPage  {
 
     private By button=By.id("login-button");
 
+    private By menuBar=By.id("react-burger-menu-btn");
+
+    private By logOutButton=By.id("logout_sidebar_link");
+
     public LogInPage(WebDriver driver) {
         this.driver = driver;
     }
@@ -43,4 +47,19 @@ public class LogInPage  {
         driver.findElement(button).click();
     }
 
+    public void LogOut(){
+        driver.findElement(menuBar).click();
+        driver.findElement(logOutButton).click();
+    }
+
+    public boolean idLoggedOut() {
+        try {
+
+            WebElement homeElement = driver.findElement(By.id("inventory_container"));
+            return homeElement.isDisplayed();
+        }
+        catch (org.openqa.selenium.NoSuchElementException e) {
+            return false;
+        }
+    }
 }
