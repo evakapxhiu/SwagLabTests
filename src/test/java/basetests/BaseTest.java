@@ -3,8 +3,6 @@ package basetests;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.events.EventFiringDecorator;
-import pages.AboutPage;
 
 import static basetests.Driver.getChromeDriver;
 
