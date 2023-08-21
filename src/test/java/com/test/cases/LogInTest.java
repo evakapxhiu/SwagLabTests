@@ -25,8 +25,6 @@ public class LogInTest extends BaseTest {
     @Test
     public void LoginUnsucessful(){
         driver.get(Baseurl);
-        driver.manage().timeouts().implicitlyWait( 5, TimeUnit.SECONDS);
-
         LogInPage logInPage=new LogInPage(driver);
         logInPage.setUsername("locked_out_user");
         logInPage.setPassword("secret_sauce");
@@ -47,14 +45,13 @@ public class LogInTest extends BaseTest {
         String actual=errorMessage.getText();
         Assertions.assertEquals(message,actual);
     }
-
     @Test
     public void logOutWithSucess(){
         driver.get(Baseurl);
         driver.manage().timeouts().implicitlyWait( 5, TimeUnit.SECONDS);
 
         LogInPage logInPage=new LogInPage(driver);
-        logInPage.setUsername("standard_user");
+        logInPage.setUsername("performance_glitch_user");
         logInPage.setPassword("secret_sauce");
         logInPage.clickButton();
         logInPage.LogOut();

@@ -13,7 +13,7 @@ public class CheckOutInfoTest extends BaseTest {
     @Test
     public void checkOutInfoTest(){
         driver.get(Baseurl);
-        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         LogInPage logInPage = new LogInPage(driver);
         logInPage.setUsername("standard_user");
         logInPage.setPassword("secret_sauce");

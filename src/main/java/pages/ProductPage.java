@@ -1,12 +1,7 @@
 package pages;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedCondition;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.*;
+import org.openqa.selenium.support.ui.*;
 
 import javax.imageio.IIOException;
 import java.io.File;
@@ -29,16 +24,13 @@ public class ProductPage {
     private By addButton=By.id("add-to-cart-sauce-labs-backpack");
 
     private By shoppingCartIcon=By.className("shopping_cart_link");
-
     private By dropDown=By.className("product_sort_container");
-
     private By removeButton=By.id("remove-sauce-labs-backpack");
 
-
+    private By footer=By.className("footer");
     public ProductPage(WebDriver driver) {
         this.driver = driver;
     }
-
     public void checkBackPackProduct(){
         driver.findElement(backPack).click();
     }
@@ -52,11 +44,9 @@ public class ProductPage {
             return false;
         }
     }
-
     public void addToCartButton(){
         driver.findElement(addButton).click();
     }
-
     public boolean isAdded() {
         try {
 
@@ -67,11 +57,10 @@ public class ProductPage {
             return false;
         }
     }
+    public void removeButton(){
+            driver.findElement(removeButton).click();
 
-public void removeButton(){
-        driver.findElement(removeButton).click();
-
-}
+    }
     public boolean isRemoved() {
         try {
 
@@ -82,7 +71,6 @@ public void removeButton(){
             return false;
         }
     }
-
     public YourCartPage cartList (){
         driver.findElement(shoppingCartIcon).click();
         return new YourCartPage(driver);
@@ -91,7 +79,6 @@ public void removeButton(){
     private Select findDropEle(){
         return new Select(driver.findElement(dropDown));
     }
-
     public void selectDropDown(String option){
         findDropEle().selectByVisibleText(option);
     }
@@ -99,10 +86,13 @@ public void removeButton(){
         List<WebElement> selectedEl = findDropEle().getAllSelectedOptions();
         return selectedEl.stream().map(e->e.getText()).collect(Collectors.toList());
     }
-
     public List<Double> getAllPrices() {
         List<WebElement> pricesElements = driver.findElements(By.className("inventory_item_price"));
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+//        FluentWait wait=new FluentWait<>(driver)
+//                .withTimeout(Duration.ofSeconds(5))
+//                .pollingEvery(Duration.ofSeconds(1))
+//                .ignoring(NoSuchElementException.class);
         wait.until(ExpectedConditions.presenceOfElementLocated(By.className("inventory_item")));
         return pricesElements
                 .stream()
@@ -159,5 +149,18 @@ public void removeButton(){
                 .map(WebElement::getText)
                 .map(price -> Double.parseDouble(price.trim().replaceAll("[^0-9.]", "")))
                 .toList();
+    }
+    public void scrollToFooter(){
+        WebElement footerElements=driver.findElement(footer);
+        footerElements.isDisplayed();
+        String script="arguments[0].scrollIntoView";
+        ((JavascriptExecutor)driver).executeScript(script,footerElements);
+    }
+    public void scrollToFooter1(){
+        WebElement footerElements=driver.findElement(footer);
+        footerElements.isDisplayed();
+        String script="window.scrollTo(0,document.body.scrollHeight)";
+        ((JavascriptExecutor)driver).executeScript(script,footerElements);
+
     }
 }

@@ -90,7 +90,7 @@ public class ProductTest extends BaseTest {
     @Test
     public void dropDownOption() {
         driver.get(Baseurl);
-        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         LogInPage logInPage = new LogInPage(driver);
         logInPage.setUsername("standard_user");
         logInPage.setPassword("secret_sauce");
@@ -127,5 +127,16 @@ public class ProductTest extends BaseTest {
             Assertions.assertTrue(webPriceProducts.contains(prod.price()));
         }
     }
-
+    @Test
+    public void scrollUntilTheFooterIsInView(){
+        driver.get(Baseurl);
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        LogInPage logInPage = new LogInPage(driver);
+        logInPage.setUsername("standard_user");
+        logInPage.setPassword("secret_sauce");
+        logInPage.clickButton();
+        ProductPage prodPage = new ProductPage(driver);
+//        prodPage.scrollToFooter();
+        prodPage.scrollToFooter1();
+    }
 }
